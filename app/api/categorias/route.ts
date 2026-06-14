@@ -16,3 +16,16 @@ export async function POST(req: Request){
         success:true,
     });
 }
+
+export async function PUT(req: Request){
+
+    const {novo_nome} = await req.json();
+    const {antigo_nome} = await req.json();
+    await db.query("UPDATE categorias SET nome = ? WHERE nome = ?",
+        [novo_nome,antigo_nome]
+    );
+    return NextResponse.json({
+        success: true,
+    });
+
+}
