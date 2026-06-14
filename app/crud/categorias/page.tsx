@@ -12,9 +12,12 @@ export default async function Home() {
     <div className="mt-5 text-center">
       <h1 className="text-5xl">CATEGORIAS</h1>
     </div>
-     <ul>
+    <div>
+      <h1 className="text-5xl h-30 flex justify-center items-center cursor-pointer transition-colors hover:text-blue-500 select-none">+</h1>
+    </div>
+     <ul className="flex flex-row gap-10 justify-center items-center h-80 font-semibold text-3xl">
         {(categorias as any[]).map((categorias) => (
-            <li key= {categorias.id}>{categorias.nome}</li>
+            <li className="hover:text-blue-500 select-none cursor-pointer" key= {categorias.id}>{categorias.nome}</li>
         ))}
      </ul>
   </>
