@@ -1,10 +1,16 @@
-import Image from "next/image";
-import Link from "next/link";
 import db from "@/lib/db";
+import type { RowDataPacket } from "mysql2";
 import BotaoAdicionar from "./components/post_form";
+import BotaoEditar from "./components/put_form";
+
+type Categoria = RowDataPacket & {
+  id: number;
+  nome: string;
+};
+
 export default async function Home() {
 
-    const [categorias] = await db.query("SELECT * FROM categorias");
+    const [categorias] = await db.query<Categoria[]>("SELECT * FROM categorias");
 
 
   return (
@@ -12,12 +18,13 @@ export default async function Home() {
     <div className="mt-5 text-center">
       <h1 className="text-5xl">CATEGORIAS</h1>
     </div>
-    <div>
-     <BotaoAdicionar />
+    <div className="flex flex-row justify-center gap-15">
+     <BotaoAdicionar/>
+     <BotaoEditar/>
     </div>
      <ul className="flex flex-row gap-10 justify-center items-center h-80 font-semibold text-3xl">
-        {(categorias as any[]).map((categorias) => (
-            <li className="hover:text-blue-500 select-none cursor-pointer" key= {categorias.id}>{categorias.nome}</li>
+      {categorias.map((categoria) => (
+        <li className="hover:text-blue-500 select-none cursor-pointer" key= {categoria.id}>{categoria.nome}</li>
         ))}
      </ul>
   </>

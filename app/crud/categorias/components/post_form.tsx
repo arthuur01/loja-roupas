@@ -20,7 +20,7 @@ export default function BotaoAdicionar(){
 
     return(
         <>
-         <h1 onClick= {() => setMostrar(true)} className="text-5xl h-30 flex justify-center items-center cursor-pointer hover:text-blue-500">
+         <h1 onClick= {() => setMostrar(!mostrar)} className="text-5xl h-30 flex justify-center items-center cursor-pointer hover:text-blue-500">
             +
          </h1>
         {mostrar && (

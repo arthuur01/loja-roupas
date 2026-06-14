@@ -15,19 +15,20 @@ export default function BotaoEditar(){
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({novo_nome})
+            body: JSON.stringify({ novo_nome, antigo_nome })
         });    
         location.reload();
     }
     return(
          <>
-         <h1 onClick= {() => setMostrar(true)} className="text-5xl h-30 flex justify-center items-center cursor-pointer hover:text-blue-500">
+         <h1 onClick= {() => setMostrar(!mostrar)} className="text-3xl h-30 flex justify-center items-center cursor-pointer hover:text-blue-500">
             EDITAR
          </h1>
         {mostrar && (
             <form action={editarCategoria} className="flex justify-center">
                 <input autoFocus name="antigo_nome" placeholder="Nome Atual"className="border p-2 rounded"/>
                 <input autoFocus name="novo_nome" placeholder="Nome novo"className="border p-2 rounded"/>
+                <button type="submit">Editar</button>
             </form>
             )}
         </>
