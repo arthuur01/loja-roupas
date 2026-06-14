@@ -2,6 +2,7 @@ import db from "@/lib/db";
 import type { RowDataPacket } from "mysql2";
 import BotaoAdicionar from "./components/post_form";
 import BotaoEditar from "./components/put_form";
+import DeletarCategoria from "./components/delete_form";
 
 type Categoria = RowDataPacket & {
   id: number;
@@ -21,6 +22,7 @@ export default async function Home() {
     <div className="flex flex-row justify-center gap-15">
      <BotaoAdicionar/>
      <BotaoEditar/>
+     <DeletarCategoria/>
     </div>
      <ul className="flex flex-row gap-10 justify-center items-center h-80 font-semibold text-3xl">
       {categorias.map((categoria) => (

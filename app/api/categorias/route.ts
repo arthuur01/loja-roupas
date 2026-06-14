@@ -29,3 +29,13 @@ export async function PUT(req: Request){
     });
 
 }
+
+export async function DELETE(req: Request){
+    const {nome} = await req.json();
+    await db.query("DELETE FROM categorias WHERE nome = ?",
+        [nome]
+    );
+    return NextResponse.json({
+        success: true,
+    });
+}
