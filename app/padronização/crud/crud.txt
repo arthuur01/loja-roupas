@@ -1,0 +1,12 @@
+ESTRUTURA DE PASTAS
+
+/nome da tabela
+ /components
+   delete_form.tsx
+   post_form.tsx
+   put_form.tsx
+ page.tsx
+
+
+
+

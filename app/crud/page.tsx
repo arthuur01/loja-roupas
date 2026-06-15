@@ -1,3 +1,4 @@
+import db from "@/lib/db";
 import { RowDataPacket } from "mysql2";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,9 +10,9 @@ type Tamanhos = RowDataPacket & {
   nome: string;
 }
 
-export default function Home() {
+export default async function Home() {
 
-  
+  const [tamanhos] = await db.query<Tamanhos[]>("SELECT * FROM tamanhos");
 
 
 
