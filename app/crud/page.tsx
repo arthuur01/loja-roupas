@@ -4,18 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 
-
-type Tamanhos = RowDataPacket & {
-  id: number;
-  nome: string;
-}
-
-export default async function Home() {
-
-  const [tamanhos] = await db.query<Tamanhos[]>("SELECT * FROM tamanhos");
-
-
-
+export default function Home() {
   return (
   <>
     <div className="mt-5 text-center">
