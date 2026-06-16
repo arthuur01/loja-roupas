@@ -13,3 +13,33 @@ export async function GET(){
     return NextResponse.json(rows);
 }
 
+export async function POST(req: Request){
+    const [nome] = await req.json();
+    await db.query(
+        "INSERT INTO tamanhos(nome) VALUES(?)",
+        [nome]
+    );
+    return NextResponse.json({
+        success: true,
+    });
+}
+
+export async function PUT(req: Request){
+    const [novo_nome, atual_nome] = await req.json();
+    await db.query("UPDATE tamanhos SET nome = ? WHERE nome = ?",
+        [novo_nome, atual_nome]
+    );
+    return NextResponse.json({
+        success: true,
+    });
+}
+
+export async function DELETE(req: Request){
+    const [nome] = await req.json();
+    await db.query("DELETE FROM tamanhos WHERE nome = ?",
+        [nome]
+    );
+    return NextResponse.json({
+        success: true,
+    });
+}
