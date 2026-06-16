@@ -65,7 +65,7 @@ export default async function Home() {
      <DeletarCategoria/>
     </div>
      <ul className="flex flex-row gap-10 justify-center items-center h-80 font-semibold text-3xl">
-      //React usamos map() porque ele transforma cada elemento do array em um elemento JSX.
+      
       {categorias.map((categoria) => (
         <li className="hover:text-blue-500 select-none cursor-pointer" key= {categoria.id}>{categoria.nome}</li>
         ))}

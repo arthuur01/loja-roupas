@@ -25,7 +25,6 @@ export default async function Home() {
          
         </div>
          <ul className="flex flex-row gap-10 justify-center items-center h-80 font-semibold text-3xl">
-          //React usamos map() porque ele transforma cada elemento do array em um elemento JSX.
           {tamanhos.map((tamanho) => (
             <li className="hover:text-blue-500 select-none cursor-pointer" key= {tamanho.id}>{tamanho.nome}</li>
             ))}
