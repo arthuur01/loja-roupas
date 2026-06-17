@@ -14,7 +14,7 @@ export async function GET(){
 }
 
 export async function POST(req: Request){
-    const [nome] = await req.json();
+    const {nome} = await req.json();
     await db.query(
         "INSERT INTO tamanhos(nome) VALUES(?)",
         [nome]
@@ -25,7 +25,7 @@ export async function POST(req: Request){
 }
 
 export async function PUT(req: Request){
-    const [novo_nome, atual_nome] = await req.json();
+    const {novo_nome, atual_nome} = await req.json();
     await db.query("UPDATE tamanhos SET nome = ? WHERE nome = ?",
         [novo_nome, atual_nome]
     );
@@ -35,7 +35,7 @@ export async function PUT(req: Request){
 }
 
 export async function DELETE(req: Request){
-    const [nome] = await req.json();
+    const {nome} = await req.json();
     await db.query("DELETE FROM tamanhos WHERE nome = ?",
         [nome]
     );
