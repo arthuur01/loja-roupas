@@ -1,0 +1,33 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model categorias {
+  id       Int        @id @default(autoincrement())
+  nome     String?    @db.VarChar(50)
+  produtos produtos[]
+}
+
+model produtos {
+  id           Int        @id @default(autoincrement())
+  nome         String     @db.VarChar(100)
+  preco        Decimal    @db.Decimal(10, 2)
+  categoria_id Int
+  tamanho_id   Int
+  categorias   categorias @relation(fields: [categoria_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_produtos_categoria")
+  tamanhos     tamanhos   @relation(fields: [tamanho_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_produtos_tamanho")
+
+  @@index([categoria_id], map: "fk_produtos_categoria")
+  @@index([tamanho_id], map: "fk_produtos_tamanho")
+}
+
+model tamanhos {
+  id       Int        @id @default(autoincrement())
+  nome     String?    @db.VarChar(50)
+  produtos produtos[]
+}
