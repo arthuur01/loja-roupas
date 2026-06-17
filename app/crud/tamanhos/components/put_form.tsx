@@ -7,6 +7,7 @@ export default function BotaoEditar(){
     const [mostrar, setMostrar] = useState(false);
 
     async function editarTamanho(formData: FormData){
+        /* os nomes tem que ser iguais aos do ROUTE*/
         const novo_nome = formData.get("novo_nome");
         const antigo_nome = formData.get("antigo_nome");
 
@@ -15,7 +16,8 @@ export default function BotaoEditar(){
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ novo_nome, antigo_nome })
+            /* os nomes tem que ser iguais aos do ROUTE*/
+            body: JSON.stringify({novo_nome, antigo_nome})
         });    
         location.reload();
     }

@@ -25,9 +25,9 @@ export async function POST(req: Request){
 }
 
 export async function PUT(req: Request){
-    const {novo_nome, atual_nome} = await req.json();
+    const {novo_nome, antigo_nome} = await req.json();
     await db.query("UPDATE tamanhos SET nome = ? WHERE nome = ?",
-        [novo_nome, atual_nome]
+        [novo_nome, antigo_nome]
     );
     return NextResponse.json({
         success: true,
