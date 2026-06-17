@@ -6,7 +6,7 @@ import { useState } from "react";
 export default function BotaoEditar(){
     const [mostrar, setMostrar] = useState(false);
 
-    async function editarCategoria(formData: FormData){
+    async function editarTamanho(formData: FormData){
         const novo_nome = formData.get("novo_nome");
         const antigo_nome = formData.get("antigo_nome");
 
@@ -25,7 +25,7 @@ export default function BotaoEditar(){
             EDITAR
          </h1>
         {mostrar && (
-            <form action={editarCategoria} className="flex justify-center">
+            <form action={editarTamanho} className="flex justify-center">
                 <input autoFocus name="antigo_nome" placeholder="Nome Atual"className="border p-2 rounded"/>
                 <input autoFocus name="novo_nome" placeholder="Nome novo"className="border p-2 rounded"/>
                 <button type="submit">Editar</button>

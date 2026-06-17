@@ -4,7 +4,7 @@ import { useState } from "react";
 export default function BotaoAdicionar(){
     const [mostrar, setMostrar] = useState(false);
 
-    async function adicionarCategoria(formData: FormData){
+    async function adicionarTamanho(formData: FormData){
 
         const nome = formData.get("nome");
 
@@ -24,7 +24,7 @@ export default function BotaoAdicionar(){
             +
          </h1>
         {mostrar && (
-            <form action={adicionarCategoria} className="flex justify-center">
+            <form action={adicionarTamanho} className="flex justify-center">
                 <input autoFocus name="nome" placeholder="Nome do novo tamanho"className="border p-2 rounded"/>
             </form>
             )}

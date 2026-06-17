@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 
-export default function DeletarCategoria(){
+export default function DeletarTamanho(){
     const [mostrar, setMostrar] = useState(false);
 
-    async function deletarCategoria(formData: FormData){
+    async function deletarTamanho(formData: FormData){
         const nome = formData.get("nome");
         await fetch("/api/tamanhos",{
              method: "DELETE",
@@ -22,7 +22,7 @@ export default function DeletarCategoria(){
             DELETAR
          </h1>
         {mostrar && (
-            <form action={deletarCategoria} className="flex justify-center">
+            <form action={deletarTamanho} className="flex justify-center">
                 <input autoFocus name="nome" placeholder="Nome do Tamanho"className="border p-2 rounded"/>
                 <button type="submit">X</button>
             </form>
