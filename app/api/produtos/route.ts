@@ -27,7 +27,7 @@ export async function PATCH(req: Request){
             {status:400}
         );
     }
-    if(Object.keys(campos),length === 0){
+    if(Object.keys(campos).length === 0){
         return NextResponse.json(
             {success:false, message: "Nada Informado"},
             {status:400}
