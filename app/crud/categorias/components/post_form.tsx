@@ -7,7 +7,6 @@ export default function BotaoAdicionar(){
     async function adicionarCategoria(formData: FormData){
 
         const nome = formData.get("nome");
-
         await fetch("/api/categorias", {
             method: "POST",
             headers: {

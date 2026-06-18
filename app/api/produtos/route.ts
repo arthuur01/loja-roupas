@@ -8,10 +8,10 @@ export  async function GET(){
 }
 
 export async function POST(req: Request){
-    const {nome,preco,tamanho_id,categoria_id,estoque} = await req.json();
+    const {nome,preco,tamanho_id,categoria_id,estoque,image_url} = await req.json();
     await db.query(
-        "INSERT INTO produtos(nome,preco,tamanho_id,categoria_id,estoque) VALUES(?, ?, ?, ?, ?)",
-        [nome, preco, tamanho_id, categoria_id, estoque]
+        "INSERT INTO produtos(nome,preco,tamanho_id,categoria_id,estoque,image_url) VALUES(?, ?, ?, ?, ?, ?)",
+        [nome, preco, tamanho_id, categoria_id, estoque, image_url]
     );
     return NextResponse.json({
         success: true,
@@ -36,7 +36,7 @@ export async function PATCH(req: Request){
 
     const updates = Object.keys(campos).map((campo) => '${campo} = ?').join(",");
     const valores = [...Object.values(campos), id];
-    await db.query( `UPDATE produtos SET ${updates} WHERE id = ? `,
+    await db.query( `UPDATE produtos SET ${updates} WHERE id = ?`,
         valores
     );
     return NextResponse.json({ success: true,});
