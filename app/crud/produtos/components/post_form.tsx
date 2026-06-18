@@ -1,6 +1,7 @@
 import { RowDataPacket } from "mysql2";
 import db from "@/lib/db";
-
+import { revalidatePath } from "next/cache";
+import Dropdown from "./dropdown";
 type Categoria = RowDataPacket &{
     id: number;
     nome: string;
@@ -36,28 +37,23 @@ export default async function CriarProduto(){
             },
             body: JSON.stringify({nome, preco, estoque, tamanho_id , categoria_id, image_url})
         });
-        location.reload();
+        revalidatePath("/crud/produtos");
     }
     return (
         <>
-         <form action = {criarProduto} className="flex justify-center">
-            <input name="nome" placeholder="Nome do Produto" className="border p-2 rounded"/> 
-            <input name="preco" placeholder="Preço do Produto" className="border p-2 rounded"/> 
-            <input name="estoque" placeholder="Quantidade no Estoque" className="border p-2 rounded"/> 
+        <div className="w-screen flex justify-center">
+         <form action = {criarProduto} className="flex gap-10 flex-col w-100 mt-10">
+            <input name="nome" placeholder="Nome do Produto" className="border p-2 rounded text-center"/> 
+            <input name="preco" placeholder="Preço do Produto" className="border p-2 rounded text-center"/> 
+            <input name="estoque" placeholder="Quantidade no Estoque" className="border p-2 rounded text-center"/> 
+            <Dropdown name="tamanho_id" placeholder="Selecione um Tamanho" options={tamanhos} />
+            <Dropdown name="categoria_id" placeholder="Selecione uma Categoria" options={categorias} />
             
-            <select name = "tamanho_id" multiple>
-                {tamanhos.map((tamanho) =>(
-                <option value = {tamanho.nome} key = {tamanho.id}> {tamanho.nome}</option>
-                ))}
-            </select>
-            <select name = "categoria_id" multiple>
-                {categorias.map((categoria) =>(
-                <option value = {categoria.nome} key = {categoria.id}> {categoria.nome}</option>
-                ))}
-            </select>
-            <input name="image_url" placeholder="URL da imagem do produto" className="border p-2 rounded"/> 
+            <input name="image_url" placeholder="URL da imagem do produto" className="border p-2 rounded text-center"/> 
          </form>
         
+        </div>
+         
         
         </>
     );
