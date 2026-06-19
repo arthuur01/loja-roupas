@@ -17,6 +17,8 @@ model produtos {
   id           Int        @id @default(autoincrement())
   nome         String     @db.VarChar(100)
   preco        Decimal    @db.Decimal(10, 2)
+  estoque      Int        @default(0)
+  image_url    String?    @db.VarChar(255)
   categoria_id Int
   tamanho_id   Int
   categorias   categorias @relation(fields: [categoria_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_produtos_categoria")

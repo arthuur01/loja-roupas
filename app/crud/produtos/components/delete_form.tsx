@@ -1,33 +1,24 @@
-import { useState } from "react";
+import db from "@/lib/db";
+import { revalidatePath } from "next/cache";
 
 
-export default function DeletarProduto(){
-    const [mostrar, setMostrar] = useState(false);
-    async function deletarProduto(formData: FormData){
-        const nome = formData.get("nome");
-        await fetch("/api/produtos",
-            {
-                method: "DELETE",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({nome}),
-            });
-            location.reload()
+
+export default function DeletarProduto({nome} : {nome:string}){
+    async function deletarProduto(){
+        "use server";
+        await db.query(
+            "DELETE FROM produtos WHERE nome = ?",
+            [nome]
+        );
+           revalidatePath("/crud/produtos");
     }
 
 
     return (
         <>
-         <h1 onClick= {() => setMostrar(!mostrar)} className="text-3xl h-30 flex justify-center items-center cursor-pointer hover:text-blue-500">
-            DELETAR
-         </h1>
-        {mostrar && (
             <form action={deletarProduto} className="flex justify-center">
-                <input autoFocus name="nome" placeholder="Nome do Tamanho"className="border p-2 rounded"/>
-                <button type="submit">X</button>
+                <button type="submit"><img src="https://uxwing.com/wp-content/themes/uxwing/download/user-interface/red-trash-can-icon.png" className="w-5 h-5"></img></button>
             </form>
-            )}
         </>
     );
 

@@ -30,13 +30,10 @@ export default async function CriarProduto(){
         const categoria_id = formData.get("categoria_id");
         const image_url = formData.get("image_url");
 
-        await fetch("/api/produtos",{
-            method: "POST",
-            headers: {
-                "Content-Type" : "application/json",
-            },
-            body: JSON.stringify({nome, preco, estoque, tamanho_id , categoria_id, image_url})
-        });
+        await db.query(
+            "INSERT INTO produtos (nome, preco, estoque, tamanho_id, categoria_id, image_url) VALUES (?, ?, ?, ?, ?, ?)",
+            [nome, preco, estoque, tamanho_id, categoria_id, image_url]
+        );
         revalidatePath("/crud/produtos");
     }
     return (
@@ -48,10 +45,9 @@ export default async function CriarProduto(){
             <input name="estoque" placeholder="Quantidade no Estoque" className="border p-2 rounded text-center"/> 
             <Dropdown name="tamanho_id" placeholder="Selecione um Tamanho" options={tamanhos} />
             <Dropdown name="categoria_id" placeholder="Selecione uma Categoria" options={categorias} />
-            
             <input name="image_url" placeholder="URL da imagem do produto" className="border p-2 rounded text-center"/> 
+            <button type="submit">Enviar</button>
          </form>
-        
         </div>
          
         
