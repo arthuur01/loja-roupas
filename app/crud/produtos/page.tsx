@@ -1,10 +1,9 @@
 
+
 import db from "@/lib/db";
-import Image from "next/image";
-import Link from "next/link";
 import { RowDataPacket } from "mysql2";
 import CriarProduto from "./components/post_form";
-import DeletarProduto from "./components/delete_form";
+import ProdutoCard from "./components/produto_card";
 
 type Produto = RowDataPacket & {
   id: number;
@@ -32,23 +31,13 @@ export default async function Home() {
 
 
   return (
-  <>
-    <div>
-      <CriarProduto/>
-    </div>
-    <div className="flex flex-row gap-3">
-      {produtos.map((produto) => (
-        <div key={produto.id} className="bg-gray-800 w-55 h-70 flex gap-2 flex-col font-bold">
-          <div className="flex justify-center w-50"><img src={produto.image_url} alt = "Imagem do Produto" className="w-20 h-20"/></div>
-          <h1>Nome: {produto.nome}</h1>
-          <h1>Preço: {produto.preco}</h1>
-          <h1>Tamanho: {produto.tamanho_nome}</h1>
-          <h1>Estoque: {produto.estoque}</h1>
-          <h1>Categoria: {produto.categoria_nome}</h1>
-          <DeletarProduto nome={produto.nome}/>
-        </div>
-      ))}
-    </div>
-  </> 
+    <>
+      <CriarProduto />
+      <div className="flex flex-row gap-3 flex-wrap">
+        {produtos.map((produto) => (
+          <ProdutoCard key={produto.id} produto={produto} />
+        ))}
+      </div>
+    </>
   );
 }
